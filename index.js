@@ -4,17 +4,18 @@ const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-ctx.strokeStyle = '#BADA55';
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
+ctx.lineWidth = 10;
 
 let isDrawing = false;
 let lastX = 0;
 let lastY = 0;
+let hue = 0;
 
 const draw = (e) => {
   if (!isDrawing) return;
-  console.log(e);
+  ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
   ctx.beginPath();
   // start from
   ctx.moveTo(lastX, lastY);
@@ -23,6 +24,7 @@ const draw = (e) => {
   ctx.stroke();
   lastX = e.offsetX;
   lastY = e.offsetY;
+  hue++;
 };
 
 canvas.addEventListener('mousemove', draw);
